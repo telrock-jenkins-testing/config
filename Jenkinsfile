@@ -12,15 +12,20 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    stage('Publish jUnit tests') {
+    stage('Upload to Nexus') {
       steps {
-        junit(allowEmptyResults: true, testResults: env.jUnitPattern)
-        
+        echo 'Loading to Nexus'
       }
     }
-	stage ('Publish jBehave tests') {
-		steps {
-			publishHTML target:[
+  }
+  
+  post {
+      always {
+      	echo 'Publishing jUnit test results'
+        junit(allowEmptyResults: true, testResults: env.jUnitPattern)
+      	echo 'Publishing jBehave test results'
+        junit(allowEmptyResults: true, testResults: env.jUnitPattern)
+        publishHTML target:[
 			allowMissing: true, 
 			alwaysLinkToLastBuild: false, 
 			keepAll: true, 
@@ -28,14 +33,9 @@ pipeline {
 			reportFiles: env.jBehaveReportFiles, 
 			reportName: env.jBehaveReportName, 
 			reportTitles: '']
-	    }                                        
-	}
-    stage('Upload to Nexus') {
-      steps {
-        echo 'Loading to Nexus'
       }
-    }
   }
+  
   environment {
     gitUrl = 'https://coenie.basson@git.telrock-labs.com/telrock-config/config-1stcredit.git'
     buildBranch = 'rc/1.9.0-SNAPSHOT'

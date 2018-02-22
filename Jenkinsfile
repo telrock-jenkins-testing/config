@@ -2,6 +2,7 @@ pipeline {
   agent any
   stages {
     stage('Checkout') {
+      echo "Checking out ${env.gitUrl} ${env.buildBranch}"
       steps {
         git(url: env.gitUrl, branch: env.buildBranch, credentialsId: 'eaf1e289-5cdf-4aa5-8490-041fc3a27097')
       }

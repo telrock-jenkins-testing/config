@@ -31,7 +31,6 @@ pipeline {
       echo 'Publishing jUnit test results'
       junit(allowEmptyResults: true, testResults: env.jUnitPattern)
       echo 'Publishing jBehave test results'
-      junit(allowEmptyResults: true, testResults: env.jUnitPattern)
       publishHTML(allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: env.jBehaveReportDir, reportFiles: env.jBehaveReportFiles, reportName: env.jBehaveReportName, reportTitles: '')
       
     }

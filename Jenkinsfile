@@ -20,7 +20,7 @@ pipeline {
   }
   environment {
     gitUrl = 'https://coenie.basson@git.telrock-labs.com/telrock-config/config-1stcredit.git'
-    buildBranch = 'origin/rc/**'
+    buildBranch = 'origin/rc/1.9.0-SNAPSHOT'
     jUnitPattern = '**/surefire-reports/*.xml'
     jBehaveReportDir = 'telrock-tas-karma/target/jbehave/view'
     jBehaveReportFiles = 'reports.html'
@@ -32,16 +32,9 @@ pipeline {
       junit(allowEmptyResults: true, testResults: env.jUnitPattern)
       echo 'Publishing jBehave test results'
       junit(allowEmptyResults: true, testResults: env.jUnitPattern)
-      publishHTML([
-        			allowMissing: true, 
-        			alwaysLinkToLastBuild: false, 
-        			keepAll: true, 
-        			reportDir: env.jBehaveReportDir, 
-        			reportFiles: env.jBehaveReportFiles, 
-        			reportName: env.jBehaveReportName, 
-        			reportTitles: ''])
-        
-      }
+      publishHTML(allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: env.jBehaveReportDir, reportFiles: env.jBehaveReportFiles, reportName: env.jBehaveReportName, reportTitles: '')
       
     }
+    
   }
+}

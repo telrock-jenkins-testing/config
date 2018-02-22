@@ -15,8 +15,21 @@ pipeline {
     stage('Publish jUnit tests') {
       steps {
         junit(allowEmptyResults: true, testResults: env.jUnitPattern)
+        
       }
     }
+	stage ('Publish jBehave tests') {
+		steps {
+			publishHTML target:[
+			allowMissing: true, 
+			alwaysLinkToLastBuild: false, 
+			keepAll: true, 
+			reportDir: env.jBehaveReportDir, 
+			reportFiles: env.jBehaveReportFiles, 
+			reportName: env.jBehaveReportName, 
+			reportTitles: '']
+	    }                                        
+	}
     stage('Upload to Nexus') {
       steps {
         echo 'Loading to Nexus'

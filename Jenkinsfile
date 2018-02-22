@@ -20,7 +20,7 @@ pipeline {
   }
   environment {
     gitUrl = 'https://coenie.basson@git.telrock-labs.com/telrock-config/config-1stcredit.git'
-    buildBranch = 'origin/rc/1.9.0-SNAPSHOT'
+    buildBranch = 'rc/**'
     jUnitPattern = '**/surefire-reports/*.xml'
     jBehaveReportDir = 'telrock-tas-karma/target/jbehave/view'
     jBehaveReportFiles = 'reports.html'

@@ -11,7 +11,7 @@ pipeline {
         sh 'mvn clean install'
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         junit(allowEmptyResults: true, testResults: '**/surefire-reports/*.xml', healthScaleFactor: 1)
       }
